@@ -2,7 +2,18 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="jumbotron text-center">
+    <h1>Boom Gaming</h1>
+</div>
+<div class="row">
+    <div class="col-md-6 text-center">
+        <h2>Start a new Game <br /> <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="Create">HERE</a> </h2>
+        <p>takes players to the login page if not logged in yet, then to the start new session page.  If they are already logged in, it goes to the start new session page.</p>
+    </div>
+    <div class="col-md-6 text-center">
+        <h2>Find a current Game <br /> <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="Index">HERE</a> </h2>
+        <p>
+            future build out, would allow players to look up any current/old saved games and open a view only copy if they are not the owner of the session.  Current games would update live for anyone guest or not the owner of the session as the active user updates.  If they are the owner, and the session is still active, they can open it up and continue editing.
+        </p>
+    </div>
 </div>

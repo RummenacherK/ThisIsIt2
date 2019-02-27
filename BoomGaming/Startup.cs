@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BoomGaming.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoomGaming
 {
@@ -31,6 +33,8 @@ namespace BoomGaming
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<BoomGamingContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("BoomGamingContextConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -51,6 +55,7 @@ namespace BoomGaming
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>
