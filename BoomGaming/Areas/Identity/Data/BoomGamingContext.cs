@@ -16,6 +16,7 @@ namespace BoomGaming.Models
         {
         }
 
+        public DbSet<BoomGamingUser> BoomGamingUsers { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Objective> Objectives { get; set; }
