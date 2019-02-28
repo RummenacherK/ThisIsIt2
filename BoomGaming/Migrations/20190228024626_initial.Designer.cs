@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoomGaming.Migrations
 {
     [DbContext(typeof(BoomGamingContext))]
-    [Migration("20190227213510_init")]
-    partial class init
+    [Migration("20190228024626_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,6 +112,46 @@ namespace BoomGaming.Migrations
                     b.HasKey("GameID");
 
                     b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("BoomGaming.Models.GameAssignment", b =>
+                {
+                    b.Property<int>("GameID");
+
+                    b.Property<int>("ObjectiveID");
+
+                    b.HasKey("GameID", "ObjectiveID");
+
+                    b.HasIndex("ObjectiveID");
+
+                    b.ToTable("GameAssignments");
+                });
+
+            modelBuilder.Entity("BoomGaming.Models.Objective", b =>
+                {
+                    b.Property<int>("ObjectiveID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category");
+
+                    b.Property<int?>("EarnedPoints");
+
+                    b.Property<string>("GameName");
+
+                    b.Property<string>("ObjectiveName");
+
+                    b.Property<int?>("StolentPoints");
+
+                    b.Property<int?>("ValueAvg");
+
+                    b.Property<int?>("ValueMax");
+
+                    b.Property<int?>("ValueMin");
+
+                    b.HasKey("ObjectiveID");
+
+                    b.ToTable("Objectives");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -237,6 +277,19 @@ namespace BoomGaming.Migrations
                     b.HasOne("BoomGaming.Models.Game", "Game")
                         .WithMany("Enrollments")
                         .HasForeignKey("GameID");
+                });
+
+            modelBuilder.Entity("BoomGaming.Models.GameAssignment", b =>
+                {
+                    b.HasOne("BoomGaming.Models.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BoomGaming.Models.Objective", "Objective")
+                        .WithMany("GameAssignments")
+                        .HasForeignKey("ObjectiveID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

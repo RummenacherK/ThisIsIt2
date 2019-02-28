@@ -1,0 +1,78 @@
+﻿@model IEnumerable<BoomGaming.Models.Objective>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GameName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ObjectiveName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValueMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValueAvg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValueMax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EarnedPoints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StolentPoints)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObjectiveName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValueMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValueAvg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValueMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EarnedPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StolentPoints)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ObjectiveID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ObjectiveID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ObjectiveID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -16,9 +16,6 @@ namespace BoomGaming.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<BoomGamingContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("BoomGamingContextConnection")));
 
                 services.AddDefaultIdentity<BoomGamingUser>()
                     .AddEntityFrameworkStores<BoomGamingContext>();

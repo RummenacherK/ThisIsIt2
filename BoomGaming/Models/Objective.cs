@@ -11,8 +11,11 @@ namespace BoomGaming.Models
         public string GameName { get; set; }
         public string Category { get; set; }
         public string ObjectiveName { get; set; }
-        public int? Value { get; set; }
-        public int? Points { get; set; }
+        public int? ValueMin { get; set; }
+        public int? ValueAvg { get; set; }
+        public int? ValueMax { get; set; }
+        public int? EarnedPoints { get; set; }
+        public int? StolentPoints { get; set; }
 
         public ICollection<GameAssignment> GameAssignments { get; set; }
     }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BoomGaming.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,6 +62,26 @@ namespace BoomGaming.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Games", x => x.GameID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Objectives",
+                columns: table => new
+                {
+                    ObjectiveID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    GameName = table.Column<string>(nullable: true),
+                    Category = table.Column<string>(nullable: true),
+                    ObjectiveName = table.Column<string>(nullable: true),
+                    ValueMin = table.Column<int>(nullable: true),
+                    ValueAvg = table.Column<int>(nullable: true),
+                    ValueMax = table.Column<int>(nullable: true),
+                    EarnedPoints = table.Column<int>(nullable: true),
+                    StolentPoints = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Objectives", x => x.ObjectiveID);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,6 +217,30 @@ namespace BoomGaming.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "GameAssignments",
+                columns: table => new
+                {
+                    ObjectiveID = table.Column<int>(nullable: false),
+                    GameID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameAssignments", x => new { x.GameID, x.ObjectiveID });
+                    table.ForeignKey(
+                        name: "FK_GameAssignments_Games_GameID",
+                        column: x => x.GameID,
+                        principalTable: "Games",
+                        principalColumn: "GameID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GameAssignments_Objectives_ObjectiveID",
+                        column: x => x.ObjectiveID,
+                        principalTable: "Objectives",
+                        principalColumn: "ObjectiveID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -245,6 +289,11 @@ namespace BoomGaming.Migrations
                 name: "IX_Enrollments_GameID",
                 table: "Enrollments",
                 column: "GameID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GameAssignments_ObjectiveID",
+                table: "GameAssignments",
+                column: "ObjectiveID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -268,6 +317,9 @@ namespace BoomGaming.Migrations
                 name: "Enrollments");
 
             migrationBuilder.DropTable(
+                name: "GameAssignments");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -275,6 +327,9 @@ namespace BoomGaming.Migrations
 
             migrationBuilder.DropTable(
                 name: "Games");
+
+            migrationBuilder.DropTable(
+                name: "Objectives");
         }
     }
 }

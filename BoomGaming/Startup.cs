@@ -33,10 +33,10 @@ namespace BoomGaming
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<BoomGamingContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("BoomGamingContextConnection")));
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<BoomGamingContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("BoomGamingContextConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

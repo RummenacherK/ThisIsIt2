@@ -133,13 +133,19 @@ namespace BoomGaming.Migrations
 
                     b.Property<string>("Category");
 
+                    b.Property<int?>("EarnedPoints");
+
                     b.Property<string>("GameName");
 
                     b.Property<string>("ObjectiveName");
 
-                    b.Property<int?>("Points");
+                    b.Property<int?>("StolentPoints");
 
-                    b.Property<int?>("Value");
+                    b.Property<int?>("ValueAvg");
+
+                    b.Property<int?>("ValueMax");
+
+                    b.Property<int?>("ValueMin");
 
                     b.HasKey("ObjectiveID");
 
