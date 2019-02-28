@@ -23,7 +23,9 @@ namespace BoomGaming.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Objectives.ToListAsync());
+            var objectives = _context.Objectives
+                .AsNoTracking();
+            return View(await objectives.ToListAsync());
         }
 
         // GET: Objectives/Details/5
